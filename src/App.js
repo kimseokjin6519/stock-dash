@@ -21,24 +21,24 @@ const App = () => {
    const fetchData = async () => {
       setError('');
       setChartData(null);
-
+   
       try {
          const response = await fetch(`http://192.168.52.128:5000/quote?symbol=${symbol}`);
          if (!response.ok) {
             const errorData = await response.json();
             throw new Error(errorData.error || 'Failed to fetch data');
          }
-
+   
          const data = await response.json();
-         const quotes = data.chart;
-
+         const quotes = data.quotes;
+   
          if (!quotes || quotes.length === 0) {
             throw new Error('No data available for the provided symbol.');
          }
-
+   
          const labels = quotes.map((quote) => new Date(quote.date).toLocaleDateString());
          const prices = quotes.map((quote) => quote.close);
-
+   
          setChartData({
             labels,
             datasets: [
@@ -47,12 +47,19 @@ const App = () => {
                   data: prices,
                   borderColor: 'rgba(75,192,192,1)',
                   backgroundColor: 'rgba(75,192,192,0.2)',
-                  tension: 0.1,  // Make the graph smooth without changing data
+                  fill: false,
+                  tension: 0.4,  // Apply smooth curves
                },
             ],
          });
       } catch (err) {
          setError(err.message || 'Failed to fetch data. Please check the symbol.');
+      }
+   };
+   
+   const handleKeyDown = (e) => {
+      if (e.key === 'Enter') {
+         fetchData();
       }
    };
 
@@ -64,6 +71,7 @@ const App = () => {
             placeholder="Enter stock symbol"
             value={symbol}
             onChange={(e) => setSymbol(e.target.value.toUpperCase())}
+            onKeyDown={handleKeyDown}  // Listen for Enter key
             style={{ marginBottom: '10px', padding: '10px', width: '200px' }}
          />
          <br />
