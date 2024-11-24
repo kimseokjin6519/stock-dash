@@ -96,6 +96,20 @@ const App = () => {
             grid: {
                display: false,
             },
+            ticks: {
+               font: {
+                  family: 'Segoe UI', 
+                  size: 12,
+               },
+               color: 'rgba(0, 0, 0, 0.5)',
+               callback: function(value, index, values) {
+                  if (index === 0) {
+                     return '';
+                  }
+                  return value;
+               },
+            },
+             position: 'right',
          },
       },
    };
@@ -129,9 +143,9 @@ const App = () => {
          {chartData && (
             <div style={{ marginTop: '20px' }}>
                <Line data={chartData} options={options} />
-               <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '10px', fontFamily: 'Sans-serif' }}>
+               <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '10px', fontFamily: 'Segoe UI' }}>
                   {customLabels.map((label, index) => (
-                     <div key={index} style={{ textAlign: 'center', fontSize: '14px', color: 'rgba(0, 0, 0, 0.5)' }}>
+                     <div key={index} style={{ textAlign: 'center', fontSize: '12px', color: 'rgba(0, 0, 0, 0.5)' }}>
                         {label}
                      </div>
                   ))}
