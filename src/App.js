@@ -113,6 +113,14 @@ const App = () => {
          },
       },
       plugins: {
+            legend: {
+            position: 'top',
+            align: 'start',    
+            labels: {
+               boxWidth: 10,  
+               padding: 10,   
+            },
+         },
          tooltip: {
             enabled: true,
             mode: 'index', 
@@ -130,17 +138,16 @@ const App = () => {
       },
    };
 
-   
    return (
-      <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center', padding: '20px' }}>
-         <h1>Stock Price Chart</h1>
+      <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
+         <h1 style={{ paddingTop: '10px' }}>Stock Price Chart</h1>
          <input
             type="text"
             placeholder="Enter stock symbol"
             value={symbol}
             onChange={(event) => setSymbol(event.target.value.toUpperCase())}
             onKeyDown={handleKeyDown}
-            style={{ marginBottom: '10px', padding: '10px', width: '200px' }}
+            style={{ marginBottom: '25px', padding: '10px', width: '200px' }}
          />
          <br />
          <button
