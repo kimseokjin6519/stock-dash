@@ -112,8 +112,25 @@ const App = () => {
              position: 'right',
          },
       },
+      plugins: {
+         tooltip: {
+            enabled: true,
+            mode: 'index', 
+            intersect: false,
+            callbacks: {
+               title: (tooltipItems) => {
+                  const date = new Date(tooltipItems[0].label);
+                  return date.toLocaleDateString();
+               },
+               label: (tooltipItem) => {
+                  return `Price: $${tooltipItem.raw.toFixed(2)}`;
+               },
+            },
+         },
+      },
    };
 
+   
    return (
       <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center', padding: '20px' }}>
          <h1>Stock Price Chart</h1>
