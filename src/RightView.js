@@ -1,22 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
 
-const RightView = () => {
-  
-   const [symbol, setSymbol] = useState('');
+const RightView = ({ tickerListJSON, activeSymbol }) => {
+
    const [chartData, setChartData] = useState(null);
    const [customLabels, setCustomLabels] = useState([]);
    const [error, setError] = useState('');
+   
+   useEffect(() => {
+      if (activeSymbol) {
+         fetchData();
+      }
+   }, [activeSymbol]);
 
    const fetchData = async () => {
       setError('');
       setChartData(null);
 
       try {
-            const response = await fetch(`http://192.168.52.128:5000/quote?symbol=${symbol}`);
+            const response = await fetch(`http://192.168.52.128:5000/quote?symbol=${activeSymbol}`);
             if (!response.ok) {
                const errorData = await response.json();
                throw new Error(errorData.error || 'Failed to fetch data');
@@ -42,7 +47,7 @@ const RightView = () => {
                labels,
                datasets: [
                   {
-                     label: `${symbol} Stock Price`,
+                     label: `${activeSymbol} Stock Price`,
                      data: prices,
                      borderColor: 'rgba(75,192,192,1)',
                      backgroundColor: gradient,
@@ -106,6 +111,7 @@ const RightView = () => {
       },
       plugins: {
             legend: {
+            display: false,
             position: 'top',
             align: 'start',    
             labels: {
@@ -142,7 +148,8 @@ const RightView = () => {
 
    return (
       <div className="w-full h-full" style={{ maxWidth: '1000px', maxHeight: '400px', margin: '0 auto', textAlign: 'center' }}>
-         
+      <div className="h-[50px]"></div>
+      <div className="flex text-3xl font-bold tracking-wide" style={{fontFamily:''}}>{activeSymbol}</div>
          
          {chartData && (
             <div style={{ marginTop: '20px' }}>
@@ -156,30 +163,6 @@ const RightView = () => {
                </div>
             </div>
          )}
-
-
-         <input
-            type="text"
-            placeholder="Enter stock symbol"
-            value={symbol}
-            onChange={(event) => setSymbol(event.target.value.toUpperCase())}
-            onKeyDown={handleKeyDown}
-            style={{ marginBottom: '25px', padding: '10px', width: '200px' }}
-         />
-         <br />
-         <button
-            onClick={fetchData}
-            style={{
-               padding: '10px 20px',
-               backgroundColor: '#007bff',
-               color: '#fff',
-               border: 'none',
-               borderRadius: '5px',
-               cursor: 'pointer',
-            }}
-         >
-            Fetch Chart
-         </button>
 
          {error && <p style={{ color: 'red', marginTop: '10px' }}>{error}</p>}
          

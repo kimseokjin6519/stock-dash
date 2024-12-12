@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import appleLogo from '../assets/apple-logo.svg';
 import yahooLogo from '../assets/yahoo.png';
 
-const LeftMenu = ({ tickerList }) => {
+const LeftMenu = ({ tickerList, setActiveSymbol }) => {
 
    const [symbolsJSON, setSymbolsJSON] = useState({});
 
@@ -27,14 +27,13 @@ const LeftMenu = ({ tickerList }) => {
    }, [tickerList]);
 
    return (
-      <div className="flex h-screen w-screen items-start">
-         
+      <div className="flex h-screen w-screen items-start">         
          <div className="w-[300px] h-full flex flex-col text-black">
+         <div className="h-[50px]"></div>
 
             {/* Search */}
 
             <div className="mx-4">
-               <div className="h-[50px]"></div>
                <div className="ml-2 text-2xl font-bold">Stocks</div>
                <input className="w-[300px] h-8 my-8 pl-2 rounded-lg bg-gray-200 text-sm outline-none" type="text" placeholder="Search" />
                <div className="ml-4 flex font-semibold tracking-tight">Business News</div>
@@ -53,7 +52,7 @@ const LeftMenu = ({ tickerList }) => {
             <div key={index}>
                <div className="mx-4">
                   <div>
-                     <div className="h-16 flex w-[300px] rounded-lg hover:bg-gray-200 cursor-default">   
+                     <div className="h-16 flex w-[300px] rounded-lg hover:bg-gray-200 cursor-default" onClick={() => {setActiveSymbol(ticker)}}>  
                         <div className="ml-4 flex flex-col justify-center">
                            <div className="flex font-semibold">{ticker}</div>
                            <div className="flex whitespace-nowrap overflow-hidden text-xs font-semibold text-gray-400"> {symbolsJSON[ticker]?.meta.shortName || "Loading..."} </div>
