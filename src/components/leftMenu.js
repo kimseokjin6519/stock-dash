@@ -28,8 +28,8 @@ const LeftMenu = ({ tickerList, setActiveSymbol }) => {
 
    return (
       <div className="flex h-screen w-screen items-start">         
-         <div className="w-[300px] h-full flex flex-col text-black">
-         <div className="h-[50px]"></div>
+         <div className="w-[300px] h-full flex flex-col text-black box-border">
+            <div className="h-[50px]"></div>
 
             {/* Search */}
 
@@ -70,7 +70,7 @@ const LeftMenu = ({ tickerList, setActiveSymbol }) => {
 
             {/* Closed */}
             
-            <div className="bg-gray-200 text-gray-400 items-center h-14 mt-auto flex">
+            <div className="w-[314px] bg-gray-200 text-gray-400 items-center h-14 mt-auto flex">
                <img className="h-8 ml-4 flex object-contain" src={yahooLogo} />
                <div className="ml-auto text-xs text-gray-500 font-light tracking-tight mr-4" style={{fontFamily:'Helvetica'}}>Market Closed</div>
             </div>

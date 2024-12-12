@@ -11,7 +11,7 @@ const App = () => {
    return (
       <div>
          <div className=""><LeftMenu tickerList = {tickerListJSON} setActiveSymbol = {setActiveSymbol} /></div>
-         <div className="flex items-center top-0 right-20 fixed"><RightView tickerList = {tickerListJSON} activeSymbol = {activeSymbol} /></div>
+         <div className="flex top-0 left-[400px] fixed"><RightView key={activeSymbol} activeSymbol = {activeSymbol} /></div>
 
       </div>
    );
