@@ -1,11 +1,10 @@
-
+import React, { useState } from 'react';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import React, { useState } from 'react';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
 
-const App = () => {
+const RightView = () => {
   
    const [symbol, setSymbol] = useState('');
    const [chartData, setChartData] = useState(null);
@@ -94,7 +93,7 @@ const App = () => {
                   family: 'Segoe UI', 
                   size: 12,
                },
-               color: 'rgba(0, 0, 0, 0.5)',
+               color: 'rgba(0, 0, 0, 1)',
                callback: function(value, index, values) {
                   if (index === 0) {
                      return '';
@@ -110,8 +109,14 @@ const App = () => {
             position: 'top',
             align: 'start',    
             labels: {
+               color: 'black',
                boxWidth: 10,  
-               padding: 10,   
+               padding: 10,
+               font: {
+                  weight: 'bold',
+                  family: 'Arial',
+                  size: 14,
+               }, 
             },
          },
          tooltip: {
@@ -129,6 +134,10 @@ const App = () => {
             },
          },
       },
+      animation: {
+         duration: 1000,  // Default: 1000ms
+         easing: 'easeOutQuart', // Default easing
+      },
    };
 
    return (
@@ -137,10 +146,10 @@ const App = () => {
          
          {chartData && (
             <div style={{ marginTop: '20px' }}>
-               <Line data={chartData} options={options} width={1000} height={300} />
+               <Line data={chartData} options={options} width={1000} height={400} />
                <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '10px', fontFamily: 'Segoe UI' }}>
                   {customLabels.map((label, index) => (
-                     <div key={index} style={{ textAlign: 'center', fontSize: '12px', color: 'rgba(0, 0, 0, 0.5)' }}>
+                     <div key={index} style={{ textAlign: 'center', fontSize: '12px', color: 'rgba(0, 0, 0, 1)' }}>
                         {label}
                      </div>
                   ))}
@@ -148,7 +157,7 @@ const App = () => {
             </div>
          )}
 
-<h1 style={{ paddingTop: '10px' }}>Stock Price Chart</h1>
+
          <input
             type="text"
             placeholder="Enter stock symbol"
@@ -178,4 +187,4 @@ const App = () => {
    );
 };
 
-export default App;
+export default RightView;
