@@ -11,7 +11,7 @@ const LeftMenu = ({ tickerList, setActiveSymbol }) => {
          const symbolsMap = {};
          for (const ticker of tickerList) {
             try {
-               const response = await fetch(`http://192.168.52.128:5000/quote?symbol=${ticker}`);
+               const response = await fetch(`http://192.168.52.128:5000/chart?symbol=${ticker}`);
                const data = await response.json();
                symbolsMap[ticker] = data;
             } catch (error) {

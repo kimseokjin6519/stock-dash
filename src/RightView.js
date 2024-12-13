@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler } from 'chart.js';
 import { Line } from 'react-chartjs-2';
@@ -11,6 +11,15 @@ const RightView = ({ tickerListJSON, activeSymbol }) => {
    const [customLabels, setCustomLabels] = useState([]);
    const [error, setError] = useState('');
    const [loading, setLoading] = useState(true);
+   
+   const chartRef = useRef(null);
+   const [chartWidth, setChartWidth] = useState(0);
+
+   useEffect(() => {
+      if (chartRef.current)
+         setChartWidth(chartRef.current.chartArea.width);
+      console.log(chartWidth);
+   }, [chartData]);
 
    useEffect(() => {
       if (activeSymbol) {
@@ -23,7 +32,7 @@ const RightView = ({ tickerListJSON, activeSymbol }) => {
       setError('');
       setChartData(null);
       try {
-         const response = await fetch(`http://192.168.52.128:5000/quote?symbol=${activeSymbol}`);
+         const response = await fetch(`http://192.168.52.128:5000/chart?symbol=${activeSymbol}`);
          if (!response.ok) {
             const errorData = await response.json();
             throw new Error(errorData.error || 'Failed to fetch data');
@@ -133,9 +142,8 @@ const RightView = ({ tickerListJSON, activeSymbol }) => {
          },
       },
       animation: {
-         duration: 1000,
-         easing: 'easeOutQuart',
-      },
+         duration: 0, // Duration in milliseconds (1000ms = 1 second)
+       }, 
    };
 
    if (loading) {
@@ -149,7 +157,7 @@ const RightView = ({ tickerListJSON, activeSymbol }) => {
          
          {chartData && (
             <div style={{ marginTop: '20px' }}>
-               <Line data={chartData} options={options} width={1000} height={250} />
+               <Line ref={chartRef} data={chartData} options={options} width={1000} height={250} />
                <div className="text-xs font-semibold text-black" style={{ display: 'flex', justifyContent: 'space-around', marginTop: '10px', fontFamily: '' }}>
                   {customLabels.map((label, index) => (
                      <div key={index} style={{ }}>
@@ -160,6 +168,100 @@ const RightView = ({ tickerListJSON, activeSymbol }) => {
             </div>
          )}
 
+         {/* Financials */}
+
+         <div className="mt-8"></div>
+         <div className="bg-gray-200 h-[2px]" style={{ width: `${chartWidth}px` }}></div>
+         <div className="mt-8"></div>
+         
+         <div className="flex grid grid-cols-4 gap-2 text-sm" style={{ width: `${chartWidth}px` }} >
+
+            <div className="border-r border-gray-300">
+               
+               <div className="flex">
+                  <div className="ml-6 text-gray-400 font-semibold" style={{ fontFamily: '' }}>Open</div>
+                  <div className="ml-auto mr-4 font-semibold" style={{ fontFamily: 'Google Sans' }}>143.80</div>
+               </div>
+
+               <div className="flex">
+                  <div className="ml-6 text-gray-400 font-semibold" style={{ fontFamily: '' }}>High</div>
+                  <div className="ml-auto mr-4 font-semibold" style={{ fontFamily: 'Google Sans' }}>144.84</div>
+               </div>
+
+               <div className="flex">
+                  <div className="ml-6 text-gray-400 font-semibold" style={{ fontFamily: '' }}>Low</div>
+                  <div className="ml-auto mr-4 font-semibold" style={{ fontFamily: 'Google Sans' }}>141.28</div>
+               </div>
+            
+            </div>
+
+            <div className="border-r border-gray-300">
+            
+               <div className="flex">
+                  <div className="ml-4 text-gray-400 font-semibold" style={{ fontFamily: '' }}>Vol</div>
+                  <div className="ml-auto mr-4 font-semibold" style={{ fontFamily: 'Google Sans' }}>123.5M</div>
+               </div>
+            
+               <div className="flex">
+                  <div className="ml-4 text-gray-400 font-semibold" style={{ fontFamily: '' }}>P/E</div>
+                  <div className="ml-auto mr-4 font-semibold" style={{ fontFamily: 'Google Sans' }}>27.98</div>
+               </div>
+            
+               <div className="flex">
+                  <div className="ml-4 text-gray-400 font-semibold" style={{ fontFamily: '' }}>Mkt Cap</div>
+                  <div className="ml-auto mr-4 font-semibold" style={{ fontFamily: 'Google Sans' }}>2.363T</div>
+               </div>
+            
+            </div>
+
+            <div className="border-r border-gray-300">
+            
+               <div className="flex">
+                  <div className="ml-4 text-gray-400 font-semibold" style={{ fontFamily: '' }}>52W H</div>
+                  <div className="ml-auto mr-4 font-semibold" style={{ fontFamily: 'Google Sans' }}>157.26</div>
+               </div>
+            
+               <div className="flex">
+                  <div className="ml-4 text-gray-400 font-semibold" style={{ fontFamily: '' }}>52W L</div>
+                  <div className="ml-auto mr-4 font-semibold" style={{ fontFamily: 'Google Sans' }}>105.00</div>
+               </div>
+            
+               <div className="flex">
+                  <div className="ml-4 text-gray-400 font-semibold" style={{ fontFamily: '' }}>Avg Vol</div>
+                  <div className="ml-auto mr-4 font-semibold" style={{ fontFamily: 'Google Sans' }}>79.05M</div>
+               </div>
+
+            </div>
+
+            <div className="">
+            
+               <div className="flex">
+                  <div className="ml-4 text-gray-400 font-semibold" style={{ fontFamily: '' }}>Yield</div>
+                  <div className="ml-auto mr-6 font-semibold" style={{ fontFamily: 'Google Sans' }}>0.60%</div>
+               </div>
+            
+               <div className="flex">
+                  <div className="ml-4 text-gray-400 font-semibold" style={{ fontFamily: '' }}>Beta</div>
+                  <div className="ml-auto mr-6 font-semibold" style={{ fontFamily: 'Google Sans' }}>1.20</div>
+               </div>
+            
+               <div className="flex">
+                  <div className="ml-4 text-gray-400 font-semibold" style={{ fontFamily: '' }}>EPS</div>
+                  <div className="ml-auto mr-6 font-semibold" style={{ fontFamily: 'Google Sans' }}>5.11</div>
+               </div>
+            
+            </div>
+         
+         </div>
+
+         <div className="mt-6 h-6 rounded bg-[rgba(75,192,192,0.4)]" style={{ width: `${chartWidth}px`}}></div>
+
+         <div className="flex flex-wrap text-justify text-sm text-gray-800 pt-4 leading-relaxed" style={{ width: `${chartWidth}px`, fontFamily: 'Roboto' }}>
+            Apple Inc. (AAPL) recently gained attention after unveiling new financial updates and innovation highlights, including performance metrics reflecting resilience in challenging markets. Analysts noted a consistent focus on AI-driven features across products. Meanwhile, supply chain dynamics and global demand for iPhones continue to drive market interest.
+         </div>
+         
+         
+         
          {error && <p style={{ color: 'red', marginTop: '10px' }}>{error}</p>}
          
       </div>
