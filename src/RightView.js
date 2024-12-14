@@ -11,7 +11,9 @@ const RightView = ({ tickerListJSON, activeSymbol }) => {
    const [customLabels, setCustomLabels] = useState([]);
    const [error, setError] = useState('');
    const [loading, setLoading] = useState(true);
-   
+   const [quoteData, setQuoteData] = useState(null);
+   const [quoteSummaryData, setQuoteSummaryData] = useState(null);
+
    const chartRef = useRef(null);
    const [chartWidth, setChartWidth] = useState(0);
 
@@ -25,9 +27,41 @@ const RightView = ({ tickerListJSON, activeSymbol }) => {
    useEffect(() => {
       if (activeSymbol) {
          fetchData(activeSymbol);
+         fetchQuoteData(activeSymbol);
+         fetchQuoteSummaryData(activeSymbol);
       }
    // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [activeSymbol]);
+   
+   const fetchQuoteSummaryData = async () => {
+      setError('');
+      setQuoteSummaryData(null);
+      try {
+         const response = await fetch(`http://192.168.52.128:5000/info?symbol=${activeSymbol}`);
+         if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || 'Failed to fetch data');
+         }
+         const data = await response.json();
+         setQuoteSummaryData(data);
+      }
+      catch (err) { setError(err.message || 'Failed to fetch data. Please check the symbol.') }
+   };
+
+   const fetchQuoteData = async () => {
+      setError('');
+      setQuoteData(null);
+      try {
+         const response = await fetch(`http://192.168.52.128:5000/quote?symbol=${activeSymbol}`);
+         if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || 'Failed to fetch data');
+         }
+         const data = await response.json();
+         setQuoteData(data);
+      }
+      catch (err) { setError(err.message || 'Failed to fetch data. Please check the symbol.') }
+   };
    
    const fetchData = async () => {
       setError('');
@@ -152,6 +186,7 @@ const RightView = ({ tickerListJSON, activeSymbol }) => {
    }
 
    return (
+
       <div className="w-full h-full" style={{ maxWidth: '1200px', maxHeight: '600px', margin: '0 auto', textAlign: 'center' }}>
          <div className="h-[50px]"></div>
          <div className="flex text-3xl font-bold tracking-wide" style={{fontFamily:''}}>{ activeSymbol }</div>
@@ -170,7 +205,6 @@ const RightView = ({ tickerListJSON, activeSymbol }) => {
          )}
 
          {/* Financials */}
-
          <div className="mt-8"></div>
          <div className="bg-gray-200 h-[1px]" style={{ width: `${chartWidth}px` }}></div>
          <div className="mt-8"></div>
@@ -181,17 +215,17 @@ const RightView = ({ tickerListJSON, activeSymbol }) => {
                
                <div className="flex">
                   <div className="ml-6 text-gray-400 font-semibold" style={{ fontFamily: '' }}>Open</div>
-                  <div className="ml-auto mr-4 font-semibold" style={{ fontFamily: 'Google Sans' }}>143.80</div>
+                  <div className="ml-auto mr-4 font-semibold" style={{ fontFamily: 'Google Sans' }}>{quoteData?.regularMarketOpen}</div>
                </div>
 
                <div className="flex">
                   <div className="ml-6 text-gray-400 font-semibold" style={{ fontFamily: '' }}>High</div>
-                  <div className="ml-auto mr-4 font-semibold" style={{ fontFamily: 'Google Sans' }}>144.84</div>
+                  <div className="ml-auto mr-4 font-semibold" style={{ fontFamily: 'Google Sans' }}>{quoteData?.regularMarketDayHigh}</div>
                </div>
 
                <div className="flex">
                   <div className="ml-6 text-gray-400 font-semibold" style={{ fontFamily: '' }}>Low</div>
-                  <div className="ml-auto mr-4 font-semibold" style={{ fontFamily: 'Google Sans' }}>141.28</div>
+                  <div className="ml-auto mr-4 font-semibold" style={{ fontFamily: 'Google Sans' }}>{quoteData?.regularMarketDayLow}</div>
                </div>
             
             </div>
@@ -200,17 +234,17 @@ const RightView = ({ tickerListJSON, activeSymbol }) => {
             
                <div className="flex">
                   <div className="ml-4 text-gray-400 font-semibold" style={{ fontFamily: '' }}>Vol</div>
-                  <div className="ml-auto mr-4 font-semibold" style={{ fontFamily: 'Google Sans' }}>123.5M</div>
+                  <div className="ml-auto mr-4 font-semibold" style={{ fontFamily: 'Google Sans' }}>{quoteData?.regularMarketVolume}</div>
                </div>
             
                <div className="flex">
                   <div className="ml-4 text-gray-400 font-semibold" style={{ fontFamily: '' }}>P/E</div>
-                  <div className="ml-auto mr-4 font-semibold" style={{ fontFamily: 'Google Sans' }}>27.98</div>
+                  <div className="ml-auto mr-4 font-semibold" style={{ fontFamily: 'Google Sans' }}>{quoteData?.trailingPE}</div>
                </div>
             
                <div className="flex">
                   <div className="ml-4 text-gray-400 font-semibold" style={{ fontFamily: '' }}>Mkt Cap</div>
-                  <div className="ml-auto mr-4 font-semibold" style={{ fontFamily: 'Google Sans' }}>2.363T</div>
+                  <div className="ml-auto mr-4 font-semibold" style={{ fontFamily: 'Google Sans' }}>{quoteData?.marketCap}</div>
                </div>
             
             </div>
@@ -219,17 +253,17 @@ const RightView = ({ tickerListJSON, activeSymbol }) => {
             
                <div className="flex">
                   <div className="ml-4 text-gray-400 font-semibold" style={{ fontFamily: '' }}>52W H</div>
-                  <div className="ml-auto mr-4 font-semibold" style={{ fontFamily: 'Google Sans' }}>157.26</div>
+                  <div className="ml-auto mr-4 font-semibold" style={{ fontFamily: 'Google Sans' }}>{quoteData?.fiftyTwoWeekHigh}</div>
                </div>
             
                <div className="flex">
                   <div className="ml-4 text-gray-400 font-semibold" style={{ fontFamily: '' }}>52W L</div>
-                  <div className="ml-auto mr-4 font-semibold" style={{ fontFamily: 'Google Sans' }}>105.00</div>
+                  <div className="ml-auto mr-4 font-semibold" style={{ fontFamily: 'Google Sans' }}>{quoteData?.fiftyTwoWeekLow}</div>
                </div>
             
                <div className="flex">
                   <div className="ml-4 text-gray-400 font-semibold" style={{ fontFamily: '' }}>Avg Vol</div>
-                  <div className="ml-auto mr-4 font-semibold" style={{ fontFamily: 'Google Sans' }}>79.05M</div>
+                  <div className="ml-auto mr-4 font-semibold" style={{ fontFamily: 'Google Sans' }}>{quoteData?.averageDailyVolume3Month}</div>
                </div>
 
             </div>
@@ -238,34 +272,32 @@ const RightView = ({ tickerListJSON, activeSymbol }) => {
             
                <div className="flex">
                   <div className="ml-4 text-gray-400 font-semibold" style={{ fontFamily: '' }}>Yield</div>
-                  <div className="ml-auto mr-6 font-semibold" style={{ fontFamily: 'Google Sans' }}>0.60%</div>
+                  <div className="ml-auto mr-6 font-semibold" style={{ fontFamily: 'Google Sans' }}>{quoteData?.dividendYield}</div>
                </div>
             
                <div className="flex">
                   <div className="ml-4 text-gray-400 font-semibold" style={{ fontFamily: '' }}>Beta</div>
-                  <div className="ml-auto mr-6 font-semibold" style={{ fontFamily: 'Google Sans' }}>1.20</div>
+                  <div className="ml-auto mr-6 font-semibold" style={{ fontFamily: 'Google Sans' }}>{quoteSummaryData?.summaryDetail?.beta}</div>
                </div>
             
                <div className="flex">
                   <div className="ml-4 text-gray-400 font-semibold" style={{ fontFamily: '' }}>EPS</div>
-                  <div className="ml-auto mr-6 font-semibold" style={{ fontFamily: 'Google Sans' }}>5.11</div>
+                  <div className="ml-auto mr-6 font-semibold" style={{ fontFamily: 'Google Sans' }}>{quoteData?.epsTrailingTwelveMonths}</div>
                </div>
             
             </div>
-         
-         </div>
 
+         </div>
 
          <div className="mt-8"></div>
             <div className="bg-gray-200 h-[1px]" style={{ width: `${chartWidth}px` }}></div>
          <div className="mt-8"></div>
 
          <div className="mt-6 h-8 rounded bg-[rgba(75,192,192,0.4)]" style={{ width: `${chartWidth}px`}}></div>
-         
-         
+                  
          {error && <p style={{ color: 'red', marginTop: '10px' }}>{error}</p>}
-         
       </div>
+         
    );
 };
 
