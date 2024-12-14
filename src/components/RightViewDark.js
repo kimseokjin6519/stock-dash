@@ -228,59 +228,59 @@ const RightView = ({ tickerListJSON, activeSymbol }) => {
          
          <div className="flex grid grid-cols-4 gap-2 text-sm" style={{ width: `${chartWidth}px` }} >
 
-            <div className="border-r border-gray-300">
+            <div className="border-r-[1px] border-gray-600">
                
                <div className="flex">
-                  <div className="ml-6 text-gray-400 font-semibold" style={{ fontFamily: '' }}>Open</div>
-                  <div className="ml-auto mr-4 font-semibold text-gray-200 tracking-wide" style={{ fontFamily: 'Noto Sans' }}>{quoteData?.regularMarketOpen ? (quoteData?.regularMarketOpen).toFixed(2) : ''}</div>
+                  <div className="ml-6 text-gray-400 font-normal text-sm tracking-wide" style={{ fontFamily: 'Open Sans' }}>Open</div>
+                  <div className="ml-auto mr-4 font-normal text-sm text-white tracking-wider" style={{ fontFamily: 'Open Sans' }}>{quoteData?.regularMarketOpen ? (quoteData?.regularMarketOpen).toFixed(2) : ''}</div>
+               </div>
+
+               <div className="flex my-1">
+                  <div className="ml-6 text-gray-400 font-normal text-sm tracking-wide" style={{ fontFamily: 'Open Sans' }}>High</div>
+                  <div className="ml-auto mr-4 font-normal text-sm text-white tracking-wider" style={{ fontFamily: 'Open Sans' }}>{quoteData?.regularMarketDayHigh ? (quoteData?.regularMarketDayHigh).toFixed(2) : ''}</div>
                </div>
 
                <div className="flex">
-                  <div className="ml-6 text-gray-400 font-semibold" style={{ fontFamily: '' }}>High</div>
-                  <div className="ml-auto mr-4 font-semibold text-gray-200 tracking-wide" style={{ fontFamily: 'Google Sans' }}>{quoteData?.regularMarketDayHigh ? (quoteData?.regularMarketDayHigh).toFixed(2) : ''}</div>
-               </div>
-
-               <div className="flex">
-                  <div className="ml-6 text-gray-400 font-semibold" style={{ fontFamily: '' }}>Low</div>
-                  <div className="ml-auto mr-4 font-semibold text-gray-200 tracking-wide" style={{ fontFamily: 'Google Sans' }}>{quoteData?.regularMarketDayLow ? (quoteData?.regularMarketDayLow).toFixed(2) : ''}</div>
+                  <div className="ml-6 text-gray-400 font-normal text-sm tracking-wide" style={{ fontFamily: 'Open Sans' }}>Low</div>
+                  <div className="ml-auto mr-4 font-normal text-sm text-white tracking-wider" style={{ fontFamily: 'Open Sans' }}>{quoteData?.regularMarketDayLow ? (quoteData?.regularMarketDayLow).toFixed(2) : ''}</div>
                </div>
             
             </div>
 
-            <div className="border-r border-gray-300">
+            <div className="border-r-[1px] border-gray-600">
             
                <div className="flex">
-                  <div className="ml-4 text-gray-400 font-semibold" style={{ fontFamily: '' }}>Vol</div>
-                  <div className="ml-auto mr-4 font-semibold text-gray-200 tracking-wide" style={{ fontFamily: 'Google Sans' }}>{quoteData?.regularMarketVolume ? formatEX(quoteData.regularMarketVolume) : ''}</div>
+                  <div className="ml-4 text-gray-400 font-normal text-sm tracking-wide" style={{ fontFamily: 'Open Sans' }}>Vol</div>
+                  <div className="ml-auto mr-4 font-normal text-sm text-white tracking-wider" style={{ fontFamily: 'Open Sans' }}>{quoteData?.regularMarketVolume ? formatEX(quoteData.regularMarketVolume) : ''}</div>
+               </div>
+            
+               <div className="flex py-1">
+                  <div className="ml-4 text-gray-400 font-normal text-sm tracking-wide" style={{ fontFamily: 'Open Sans' }}>P/E</div>
+                  <div className="ml-auto mr-4 font-normal text-sm text-white tracking-wider" style={{ fontFamily: 'Open Sans' }}>{quoteData?.trailingPE ? (quoteData?.trailingPE).toFixed(2) : ''}</div>
                </div>
             
                <div className="flex">
-                  <div className="ml-4 text-gray-400 font-semibold" style={{ fontFamily: '' }}>P/E</div>
-                  <div className="ml-auto mr-4 font-semibold text-gray-200 tracking-wide" style={{ fontFamily: 'Google Sans' }}>{quoteData?.trailingPE ? (quoteData?.trailingPE).toFixed(2) : ''}</div>
-               </div>
-            
-               <div className="flex">
-                  <div className="ml-4 text-gray-400 font-semibold" style={{ fontFamily: '' }}>Mkt Cap</div>
-                  <div className="ml-auto mr-4 font-semibold text-gray-200 tracking-wide" style={{ fontFamily: 'Google Sans' }}>{quoteData?.marketCap ? formatEX(quoteData?.marketCap): ''}</div>
+                  <div className="ml-4 text-gray-400 font-normal text-sm tracking-wide" style={{ fontFamily: 'Open Sans' }}>Mkt Cap</div>
+                  <div className="ml-auto mr-4 font-normal text-sm text-white tracking-wider" style={{ fontFamily: 'Open Sans' }}>{quoteData?.marketCap ? formatEX(quoteData?.marketCap): ''}</div>
                </div>
             
             </div>
 
-            <div className="border-r border-gray-300">
+            <div className="border-r-[1px] border-gray-600">
             
                <div className="flex">
-                  <div className="ml-4 text-gray-400 font-semibold" style={{ fontFamily: '' }}>52W H</div>
-                  <div className="ml-auto mr-4 font-semibold text-gray-200 tracking-wide" style={{ fontFamily: 'Google Sans' }}>{quoteData?.fiftyTwoWeekHigh ? (quoteData?.fiftyTwoWeekHigh).toFixed(2) : ''}</div>
+                  <div className="ml-4 text-gray-400 font-normal text-sm tracking-wide" style={{ fontFamily: 'Open Sans' }}>52W H</div>
+                  <div className="ml-auto mr-4 font-normal text-sm text-white tracking-wider" style={{ fontFamily: 'Open Sans' }}>{quoteData?.fiftyTwoWeekHigh ? (quoteData?.fiftyTwoWeekHigh).toFixed(2) : ''}</div>
+               </div>
+            
+               <div className="flex py-1">
+                  <div className="ml-4 text-gray-400 font-normal text-sm tracking-wide" style={{ fontFamily: 'Open Sans' }}>52W L</div>
+                  <div className="ml-auto mr-4 font-normal text-sm text-white tracking-wider" style={{ fontFamily: 'Open Sans' }}>{quoteData?.fiftyTwoWeekLow ? (quoteData?.fiftyTwoWeekLow).toFixed(2) : ''}</div>
                </div>
             
                <div className="flex">
-                  <div className="ml-4 text-gray-400 font-semibold" style={{ fontFamily: '' }}>52W L</div>
-                  <div className="ml-auto mr-4 font-semibold text-gray-200 tracking-wide" style={{ fontFamily: 'Google Sans' }}>{quoteData?.fiftyTwoWeekLow ? (quoteData?.fiftyTwoWeekLow).toFixed(2) : ''}</div>
-               </div>
-            
-               <div className="flex">
-                  <div className="ml-4 text-gray-400 font-semibold" style={{ fontFamily: '' }}>Avg Vol</div>
-                  <div className="ml-auto mr-4 font-semibold text-gray-200 tracking-wide" style={{ fontFamily: 'Google Sans' }}>{quoteData?.averageDailyVolume3Month ? formatEX(quoteData?.averageDailyVolume3Month) : ''}</div>
+                  <div className="ml-4 text-gray-400 font-normal text-sm tracking-wide" style={{ fontFamily: 'Open Sans' }}>Avg Vol</div>
+                  <div className="ml-auto mr-4 font-normal text-sm text-white tracking-wider" style={{ fontFamily: 'Open Sans' }}>{quoteData?.averageDailyVolume3Month ? formatEX(quoteData?.averageDailyVolume3Month) : ''}</div>
                </div>
 
             </div>
@@ -288,18 +288,18 @@ const RightView = ({ tickerListJSON, activeSymbol }) => {
             <div className="">
             
                <div className="flex">
-                  <div className="ml-4 text-gray-400 font-semibold" style={{ fontFamily: '' }}>Yield</div>
-                  <div className="ml-auto mr-6 font-semibold text-gray-200 tracking-wide" style={{ fontFamily: 'Google Sans' }}>{quoteData?.dividendYield ? (quoteData.dividendYield).toFixed(2) : ''}%</div>
+                  <div className="ml-4 text-gray-400 font-normal text-sm tracking-wide" style={{ fontFamily: 'Open Sans' }}>Yield</div>
+                  <div className="ml-auto mr-6 font-normal text-sm text-white tracking-wider" style={{ fontFamily: 'Open Sans' }}>{quoteData?.dividendYield ? (quoteData.dividendYield).toFixed(2) : ''}%</div>
+               </div>
+            
+               <div className="flex py-1">
+                  <div className="ml-4 text-gray-400 font-normal text-sm tracking-wide" style={{ fontFamily: 'Open Sans' }}>Beta</div>
+                  <div className="ml-auto mr-6 font-normal text-sm text-white tracking-wider" style={{ fontFamily: 'Open Sans' }}>{quoteSummaryData?.summaryDetail?.beta}</div>
                </div>
             
                <div className="flex">
-                  <div className="ml-4 text-gray-400 font-semibold" style={{ fontFamily: '' }}>Beta</div>
-                  <div className="ml-auto mr-6 font-semibold text-gray-200 tracking-wide" style={{ fontFamily: 'Google Sans' }}>{quoteSummaryData?.summaryDetail?.beta}</div>
-               </div>
-            
-               <div className="flex">
-                  <div className="ml-4 text-gray-400 font-semibold" style={{ fontFamily: '' }}>EPS</div>
-                  <div className="ml-auto mr-6 font-semibold text-gray-200 tracking-wide" style={{ fontFamily: 'Google Sans' }}>{quoteData?.epsTrailingTwelveMonths}</div>
+                  <div className="ml-4 text-gray-400 font-normal text-sm tracking-wide" style={{ fontFamily: 'Open Sans' }}>EPS</div>
+                  <div className="ml-auto mr-6 font-normal text-sm text-white tracking-wider" style={{ fontFamily: 'Open Sans' }}>{quoteData?.epsTrailingTwelveMonths}</div>
                </div>
             
             </div>
