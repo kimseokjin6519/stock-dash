@@ -272,7 +272,7 @@ const RightView = ({ tickerListJSON, activeSymbol }) => {
             
                <div className="flex">
                   <div className="ml-4 text-gray-400 font-semibold" style={{ fontFamily: '' }}>Yield</div>
-                  <div className="ml-auto mr-6 font-semibold" style={{ fontFamily: 'Google Sans' }}>{quoteData?.dividendYield}</div>
+                  <div className="ml-auto mr-6 font-semibold" style={{ fontFamily: 'Google Sans' }}>{quoteData?.dividendYield ? quoteData.dividendYield : ''}</div>
                </div>
             
                <div className="flex">
@@ -293,7 +293,7 @@ const RightView = ({ tickerListJSON, activeSymbol }) => {
             <div className="bg-gray-200 h-[1px]" style={{ width: `${chartWidth}px` }}></div>
          <div className="mt-8"></div>
 
-         <div className="mt-6 h-8 rounded bg-[rgba(75,192,192,0.4)]" style={{ width: `${chartWidth}px`}}></div>
+         <div className="mt-6 h-8 rounded-sm bg-[rgba(75,192,192,0.4)]" style={{ width: `${chartWidth}px`}}></div>
                   
          {error && <p style={{ color: 'red', marginTop: '10px' }}>{error}</p>}
       </div>

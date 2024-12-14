@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import LeftMenu from './components/leftMenu'
-import RightView from './RightView'
+import LeftMenu from './components/leftMenuDark'
+import RightView from './components/RightViewDark'
 
 const App = () => {
    
    const tickerListJSON = ["AAPL", "NVDA", "MSFT", "AMZN", "TSLA", "META"];
 
-   const [activeSymbol, setActiveSymbol] = useState(null);
+   const [activeSymbol, setActiveSymbol] = useState(tickerListJSON[0]);
 
    return (
       <div>
