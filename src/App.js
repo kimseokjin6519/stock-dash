@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import LeftMenu from './components/leftMenuDark'
-import RightView from './components/RightViewDark'
+
+import LeftMenu from './components/leftMenu'
+import RightView from './components/RightView'
 
 const App = () => {
    

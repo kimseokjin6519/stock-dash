@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import appleLogo from '../assets/apple-logo.svg';
-import yahooLogo from '../assets/yahoo.png';
+import yahooLogo from '../assets/yahoo-dark.svg';
 
 const LeftMenu = ({ tickerList, setActiveSymbol }) => {
    const [symbolsJSON, setSymbolsJSON] = useState({});
@@ -75,15 +75,14 @@ const LeftMenu = ({ tickerList, setActiveSymbol }) => {
             ))}
 
             {/* Closed */}
-            <div className="w-[314px] bg-gray-800 text-gray-500 items-center h-14 mt-auto flex">
-               <img className="h-8 ml-4 flex object-contain invert" src={yahooLogo} />
-               <div
-                  className="ml-auto text-xs text-gray-400 font-light tracking-tight mr-4"
-                  style={{ fontFamily: 'Helvetica' }}
-               >
-                  Market Closed
-               </div>
+            
+            
+            {/* <div className="w-[314px] bg-gray-800 text-gray-500 items-center h-14 mt-auto flex">
+               <img className="h-8 ml-4 flex " src={yahooLogo} />
+               <div className="ml-auto text-xs text-gray-400 font-light tracking-tight mr-4" style={{ fontFamily: 'Helvetica' }}>Market Closed</div>
             </div>
+            */}
+
          </div>
       </div>
    );
