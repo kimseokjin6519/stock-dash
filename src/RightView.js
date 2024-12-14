@@ -16,8 +16,9 @@ const RightView = ({ tickerListJSON, activeSymbol }) => {
    const [chartWidth, setChartWidth] = useState(0);
 
    useEffect(() => {
-      if (chartRef.current)
+      if (chartRef.current) {
          setChartWidth(chartRef.current.chartArea.width);
+      }
       console.log(chartWidth);
    }, [chartData]);
 
@@ -171,7 +172,7 @@ const RightView = ({ tickerListJSON, activeSymbol }) => {
          {/* Financials */}
 
          <div className="mt-8"></div>
-         <div className="bg-gray-200 h-[2px]" style={{ width: `${chartWidth}px` }}></div>
+         <div className="bg-gray-200 h-[1px]" style={{ width: `${chartWidth}px` }}></div>
          <div className="mt-8"></div>
          
          <div className="flex grid grid-cols-4 gap-2 text-sm" style={{ width: `${chartWidth}px` }} >
@@ -254,12 +255,12 @@ const RightView = ({ tickerListJSON, activeSymbol }) => {
          
          </div>
 
-         <div className="mt-6 h-6 rounded bg-[rgba(75,192,192,0.4)]" style={{ width: `${chartWidth}px`}}></div>
 
-         <div className="flex flex-wrap text-justify text-sm text-gray-800 pt-4 leading-relaxed" style={{ width: `${chartWidth}px`, fontFamily: 'Roboto' }}>
-            Apple Inc. (AAPL) recently gained attention after unveiling new financial updates and innovation highlights, including performance metrics reflecting resilience in challenging markets. Analysts noted a consistent focus on AI-driven features across products. Meanwhile, supply chain dynamics and global demand for iPhones continue to drive market interest.
-         </div>
-         
+         <div className="mt-8"></div>
+            <div className="bg-gray-200 h-[1px]" style={{ width: `${chartWidth}px` }}></div>
+         <div className="mt-8"></div>
+
+         <div className="mt-6 h-8 rounded bg-[rgba(75,192,192,0.4)]" style={{ width: `${chartWidth}px`}}></div>
          
          
          {error && <p style={{ color: 'red', marginTop: '10px' }}>{error}</p>}
