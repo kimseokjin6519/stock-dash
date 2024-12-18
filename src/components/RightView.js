@@ -250,7 +250,7 @@ const RightView = ({ tickerListJSON, activeSymbol }) => {
                
                <div className="flex">
                   <div className="flex justify-center ml-6 text-gray-400 font-semibold leading-snug" style={{ fontFamily: '' }}>Open</div>
-                  <div className="flex justify-center ml-auto mr-4 font-semibold text-sm tracking-wide" style={{ fontFamily: 'Droid Sans Mono' }}>{quoteData?.regularMarketOpen}</div>
+                  <div className="flex justify-center ml-auto mr-4 font-semibold text-sm tracking-wide" style={{ fontFamily: 'Droid Sans Mono' }}>{quoteData?.regularMarketOpen ? (quoteData?.regularMarketOpen).toFixed(2) : ''}</div>
                </div>
 
                <div className="flex">
