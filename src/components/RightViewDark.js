@@ -181,13 +181,17 @@ const RightView = ({ tickerListJSON, activeSymbol }) => {
             enabled: true,
             mode: 'index', 
             intersect: false,
+            cornerRadius: '0',
+            borderWidth: 0.33,
+            borderColor: 'white',
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
             callbacks: {
                title: (tooltipItems) => {
                   const date = new Date(tooltipItems[0].label);
                   return date.toLocaleDateString();
                },
                label: (tooltipItem) => {
-                  return `Price: $${tooltipItem.raw.toFixed(2)}`;
+                  return ` Price: $${tooltipItem.raw.toFixed(2)}`;
                },
             },
          },

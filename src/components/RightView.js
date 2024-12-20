@@ -200,13 +200,20 @@ const RightView = ({ tickerListJSON, activeSymbol }) => {
             enabled: true,
             mode: 'index', 
             intersect: false,
+            backgroundColor: 'rgba(255, 255, 255, 0.5)',
+            bodyColor: 'rgba(0, 0, 0, 1)',
+            titleColor: 'rgba(0, 0, 0, 1)',
+            borderWidth: 0.33,
+            cornerRadius: '0',
+            borderColor: 'black',
             callbacks: {
+               
                title: (tooltipItems) => {
                   const date = new Date(tooltipItems[0].label);
                   return date.toLocaleDateString();
                },
                label: (tooltipItem) => {
-                  return `Price: $${tooltipItem.raw.toFixed(2)}`;
+                  return ` Price: $${tooltipItem.raw.toFixed(2)}`;
                },
             },
          },
