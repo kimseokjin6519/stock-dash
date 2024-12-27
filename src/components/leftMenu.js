@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import appleLogo from '../assets/apple-logo.svg';
 import yahooLogo from '../assets/yahoo.png';
+import StockChart from './StockChart';
 
 const LeftMenu = ({ tickerList, setActiveSymbol }) => {
 
@@ -59,7 +60,7 @@ const LeftMenu = ({ tickerList, setActiveSymbol }) => {
                         </div>
                         
                         <div className="flex items-center ml-auto mr-4">
-                           <div className="">[Graph]</div>
+                           <div className="mr-2 items-end flex"><StockChart activeSymbol = {ticker} /></div>
                            <div className="">{symbolsJSON[ticker]?.meta.regularMarketPrice || "Loading..."}</div>
                         </div>
                      </div>
@@ -70,7 +71,7 @@ const LeftMenu = ({ tickerList, setActiveSymbol }) => {
 
             {/* Closed */}
             
-            <div className="w-[314px] bg-gray-200 text-gray-400 items-center h-14 mt-auto flex">
+            <div className="w-[314px] bg-gray-200 text-gray-400 items-center h-14 mt-auto flex rounded-tr-xl">
                <img className="h-8 ml-4 flex object-contain" src={yahooLogo} />
                <div className="ml-auto text-xs text-gray-500 font-light tracking-tight mr-4" style={{fontFamily:'Helvetica'}}>Market Closed</div>
             </div>

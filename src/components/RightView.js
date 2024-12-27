@@ -204,7 +204,7 @@ const RightView = ({ tickerListJSON, activeSymbol }) => {
             bodyColor: 'rgba(0, 0, 0, 1)',
             titleColor: 'rgba(0, 0, 0, 1)',
             borderWidth: 0.33,
-            cornerRadius: '0',
+            cornerRadius: '4',
             borderColor: 'black',
             callbacks: {
                
