@@ -1,3 +1,3 @@
 # Stock Dashboard App
 
-![Stock Dashboard Screenshot](./src/assets/stock-dash-3.png)
+![Stock Dashboard Screenshot](./src/assets/stock-dash-4.png)
