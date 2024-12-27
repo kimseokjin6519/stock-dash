@@ -59,9 +59,9 @@ const LeftMenu = ({ tickerList, setActiveSymbol }) => {
                            <div className="flex whitespace-nowrap overflow-hidden text-xs font-semibold text-gray-400"> {symbolsJSON[ticker]?.meta.shortName || "Loading..."} </div>
                         </div>
                         
-                        <div className="flex items-center ml-auto mr-4">
-                           <div className="mr-2 items-end flex"><StockChart activeSymbol = {ticker} /></div>
-                           <div className="">{symbolsJSON[ticker]?.meta.regularMarketPrice || "Loading..."}</div>
+                        <div className="flex items-center ml-auto mr-2">
+                           <div className="mr-4 items-end flex" ><StockChart activeSymbol = {ticker} /></div>
+                           <div className="font-semibold" style={{fontFamily:'Roboto'}} >{symbolsJSON[ticker]?.meta.regularMarketPrice || "Loading..."}</div>
                         </div>
                      </div>
                   </div>
